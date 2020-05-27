@@ -11,33 +11,40 @@ public class CardTest {
     public void incorrectCardLengthExtraSpaceAfter() {
         String cardString = "2H ";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), -1);
+        Assert.assertEquals(card.getCardValue(), "-1");
     }
 
     @Test
     public void incorrectCardLengthExtraSpaceBefore() {
         String cardString = " 2H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), -1);
+        Assert.assertEquals(card.getCardValue(), "-1");
     }
 
     @Test
     public void incorrectCardLengthExtraDigit() {
         String cardString = "52H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), -1);
+        Assert.assertEquals(card.getCardValue(), "-1");
     }
 
     @Test
     public void incorrectValueZero() {
         String cardString = "0H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), -1);
+        Assert.assertEquals(card.getCardValue(), "-1");
     }
 
     @Test
     public void incorrectValueNonDigit() {
-        String cardString = "AH";
+        String cardString = "VH";
+        Card card = new Card(cardString);
+        Assert.assertEquals(card.getCardValue(), "-1");
+    }
+
+    @Test
+    public void incorrectValueSpecialCharacter() {
+        String cardString = "%H";
         Card card = new Card(cardString);
         Assert.assertEquals(card.getCardValue(), -1);
     }
@@ -45,6 +52,13 @@ public class CardTest {
     @Test
     public void correctValueCorrectSuit() {
         String cardString = "4H";
+        Card card = new Card(cardString);
+        Assert.assertEquals(card.getCardValue(), 4);
+    }
+
+    @Test
+    public void correctLetterValueCorrectSuit() {
+        String cardString = "TD";
         Card card = new Card(cardString);
         Assert.assertEquals(card.getCardValue(), 4);
     }

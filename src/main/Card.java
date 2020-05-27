@@ -1,21 +1,55 @@
 package main;
 
 public class Card {
-    private int cardValue = 0;
+    private String cardValue = "-1";
     private String cardSuit = "";
 
     public Card(String cardString) {
         if (cardString.length() != 2) {
-            System.out.println("Read invalid card value: " + cardString
-                + "...returning without instantiating card.");
+            System.out.println("Card length does not equal 2: " + cardString
+                    + "...returning without instantiating card values.");
             return;
         }
-        cardValue = Integer.parseInt(cardString.substring(0, 0));
-        cardSuit = cardString.substring(1, 1);
+        String localCardValue = cardString.substring(0, 1);
+        String localCardSuit = cardString.substring(1, 2);
+
+        //Also T J Q K A
+        if (localCardValue.matches("[1-9 | TJQKA]")) {
+            cardValue = localCardValue;
+        }
+        else {
+            System.out.println("Not a valid card value");
+        }
+
+        //H S C D
+        if (localCardSuit.matches("[HSCD]")) {
+            cardSuit = localCardSuit.toUpperCase();
+        }
+        else {
+            System.out.println("Not a valid card suit");
+        }
     }
 
-    public int getCardValue() {
+    public String getCardValue() {
         return cardValue;
+    }
+
+    public int getCardValueAsInt() {
+        if (cardValue.matches("[TJQKA]")) {
+            switch (cardValue) {
+                case "T":
+                    return 10;
+                case "J":
+                    return 11;
+                case "Q":
+                    return 12;
+                case "K":
+                    return 13;
+                case "A":
+                    return 14;
+            }
+        }
+        return Integer.parseInt(cardValue);
     }
 
     public String getCardSuit() {
