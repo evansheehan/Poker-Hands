@@ -66,12 +66,13 @@ public class PokerHands {
     }
 
     public boolean checkStraightFlush(Card[] hand) {
-        int handRank = hand[0].getCardValueAsInt();
+        int handRank = hand[hand.length-1].getCardValueAsInt();
+        int previousValue = hand[0].getCardValueAsInt();
         String handSuit = hand[0].getCardSuit();
         for (int i = 1; i < hand.length; i++) {
             if (hand[i].getCardSuit() != handSuit) {return false;}
-            if (hand[i].getCardValueAsInt() > handRank) {handRank = hand[i].getCardValueAsInt();}
+            if (previousValue + 1 != hand[i].getCardValueAsInt()) {return false;}
         }
-        return false;
+        return true;
     }
 }
