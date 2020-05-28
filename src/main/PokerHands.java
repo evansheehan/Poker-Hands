@@ -70,8 +70,9 @@ public class PokerHands {
         int previousValue = hand[0].getCardValueAsInt();
         String handSuit = hand[0].getCardSuit();
         for (int i = 1; i < hand.length; i++) {
-            if (hand[i].getCardSuit() != handSuit) {return false;}
+            if (!hand[i].getCardSuit().equals(handSuit)) {return false;}
             if (previousValue + 1 != hand[i].getCardValueAsInt()) {return false;}
+            previousValue = hand[i].getCardValueAsInt();
         }
         return true;
     }
