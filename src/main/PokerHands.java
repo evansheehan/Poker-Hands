@@ -72,6 +72,6 @@ public class PokerHands {
             if (hand[i].getCardSuit() != handSuit) {return false;}
             if (hand[i].getCardValueAsInt() > handRank) {handRank = hand[i].getCardValueAsInt();}
         }
-        return false;
+        return true;
     }
 }
