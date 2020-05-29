@@ -59,6 +59,10 @@ public class Hand {
         return cards;
     }
 
+    public static int getHandSize() {
+        return HAND_SIZE;
+    }
+
     /*public Card getCard(int cardIndex) {
         return cards[cardIndex];
     }
