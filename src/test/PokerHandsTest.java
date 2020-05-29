@@ -10,6 +10,38 @@ import static org.junit.Assert.assertEquals;
 public class PokerHandsTest {
 
     @Test
+    public void validFourOfAKind() {
+        PokerHands pokerHands = new PokerHands();
+        String inputString = "1H 1D 1C 1S 3S";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        Assert.assertEquals(true, pokerHands.checkFourOfAKind(cards));
+    }
+
+    @Test
+    public void validFourOfAKindSplit() {
+        PokerHands pokerHands = new PokerHands();
+        String inputString = "KH KD 3C KS KC";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        Assert.assertEquals(true, pokerHands.checkFourOfAKind(cards));
+    }
+
+    @Test
+    public void validFourOfAKindWrongStart() {
+        PokerHands pokerHands = new PokerHands();
+        String inputString = "3C KD KH KS KC";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        Assert.assertEquals(true, pokerHands.checkFourOfAKind(cards));
+    }
+
+    @Test
+    public void invalidFourOfAKing() {
+        PokerHands pokerHands = new PokerHands();
+        String inputString = "1H 1D 1C 3C 3S";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        Assert.assertEquals(false, pokerHands.checkFourOfAKind(cards));
+    }
+
+    @Test
     public void validStraightFlushNumericalValues() {
         PokerHands pokerHands = new PokerHands();
         String inputString = "1H 2H 3H 4H 5H";

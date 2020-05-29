@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class PokerHands {
 
     private Card[] blackHand;
@@ -51,10 +54,18 @@ public class PokerHands {
         return false;
     }
 
-    public boolean checkFourOfAKind(Hand hand) {
-        /*for (Card card : hand) {
-
-        }*/
+    public boolean checkFourOfAKind(Card[] hand) {
+        int matches = 1;
+        for (int i = 0; i <= Hand.getHandSize() - 4; i++) {
+            int checkValue = hand[i].getCardValueAsInt();
+            for (int j = i+1; j < hand.length; j++) {
+                if (checkValue == hand[j].getCardValueAsInt()) {
+                    matches++;
+                }
+            }
+            if (matches == 4) {return true;}
+            matches = 1;
+        }
         return false;
     }
 
