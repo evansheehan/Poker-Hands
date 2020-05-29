@@ -1,6 +1,6 @@
 package main;
 
-public class Card {
+public class Card implements Comparable<Card>{
     private String cardValue = "-1";
     private String cardSuit = "";
 
@@ -54,5 +54,12 @@ public class Card {
 
     public String getCardSuit() {
         return cardSuit;
+    }
+
+    @Override
+    public int compareTo(Card card) {
+        if (this.getCardValueAsInt() == card.getCardValueAsInt()) {return 0;}
+        else if (this.getCardValueAsInt() < card.getCardValueAsInt()) {return -1;}
+        return 1;
     }
 }
