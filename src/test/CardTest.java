@@ -11,56 +11,56 @@ public class CardTest {
     public void incorrectCardLengthExtraSpaceAfter() {
         String cardString = "2H ";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), "-1");
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void incorrectCardLengthExtraSpaceBefore() {
         String cardString = " 2H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), "-1");
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void incorrectCardLengthExtraDigit() {
         String cardString = "52H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), "-1");
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void incorrectValueZero() {
         String cardString = "0H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), "-1");
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void incorrectValueNonDigit() {
         String cardString = "VH";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), "-1");
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void incorrectValueSpecialCharacter() {
         String cardString = "%H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), -1);
+        Assert.assertEquals(-1, card.getCardValueAsInt());
     }
 
     @Test
     public void correctValueCorrectSuit() {
         String cardString = "4H";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), 4);
+        Assert.assertEquals(4, card.getCardValueAsInt());
     }
 
     @Test
     public void correctLetterValueCorrectSuit() {
         String cardString = "TD";
         Card card = new Card(cardString);
-        Assert.assertEquals(card.getCardValue(), 4);
+        Assert.assertEquals(4, card.getCardValueAsInt());
     }
 
 }
