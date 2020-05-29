@@ -26,12 +26,20 @@ public class PokerHandsTest {
     }
 
     @Test
+    public void validStraightFlushNumericalAndLetteredValuesUnordered() {
+        PokerHands pokerHands = new PokerHands();
+        String inputString = "TH JH KH QH 9H";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        Assert.assertEquals(true, pokerHands.checkStraightFlush(cards));
+    }
+
+    @Test
     public void invalidStraightFlush() {
         PokerHands pokerHands = new PokerHands();
         Card[] cards;
         String inputString;
 
-        inputString = "1H 2H 3H 4H 6H";
+        inputString = "1H 2H %H 4H 5H";
         cards = Hand.generateHandFromString(inputString);
         Assert.assertEquals(false, pokerHands.checkStraightFlush(cards));
 
