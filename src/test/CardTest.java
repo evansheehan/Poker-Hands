@@ -60,7 +60,7 @@ public class CardTest {
     public void correctLetterValueCorrectSuit() {
         String cardString = "TD";
         Card card = new Card(cardString);
-        Assert.assertEquals(4, card.getCardValueAsInt());
+        Assert.assertEquals(10, card.getCardValueAsInt());
     }
 
 }
