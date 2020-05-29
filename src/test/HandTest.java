@@ -27,4 +27,26 @@ public class HandTest {
             System.out.println("Caught null pointer, as expected");
         }
     }
+
+    @Test
+    public void handSortTest() {
+        String inputString = "2H KD KS AC 5D";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        //cards = Hand.sortHandBySuit(cards);
+        for (Card card : cards) {
+            System.out.println(card.getCardValue() + card.getCardSuit());
+        }
+
+    }
+
+    @Test
+    public void handSortTestMoreMixed() {
+        String inputString = "TD 8H 2C QS 6D";
+        Card[] cards = Hand.generateHandFromString(inputString);
+        //cards = Hand.sortHandBySuit(cards);
+        for (Card card : cards) {
+            System.out.println(card.getCardValue() + card.getCardSuit());
+        }
+
+    }
 }
