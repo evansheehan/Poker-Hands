@@ -1,8 +1,5 @@
 package main;
 
-import java.util.Collection;
-import java.util.Collections;
-
 public class Hand {
 
     private static final int HAND_SIZE = 5;
