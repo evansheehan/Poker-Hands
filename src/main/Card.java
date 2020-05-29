@@ -1,6 +1,6 @@
 package main;
 
-public class Card implements Comparable<Card>{
+public class Card {
     private String cardValue = "-1";
     private String cardSuit = "";
 
@@ -52,14 +52,22 @@ public class Card implements Comparable<Card>{
         return Integer.parseInt(cardValue);
     }
 
-    public String getCardSuit() {
-        return cardSuit;
+    public int getCardSuitAsInt() {
+        switch (cardSuit) {
+            case "C":
+                return 1;
+            case "D":
+                return 2;
+            case "H":
+                return 3;
+            case "S":
+                return 4;
+        }
+        System.out.println("Something went wrong...card suit doesn't match cases");
+        return -1;
     }
 
-    @Override
-    public int compareTo(Card card) {
-        if (this.getCardValueAsInt() == card.getCardValueAsInt()) {return 0;}
-        else if (this.getCardValueAsInt() < card.getCardValueAsInt()) {return -1;}
-        return 1;
+    public String getCardSuit() {
+        return cardSuit;
     }
 }
