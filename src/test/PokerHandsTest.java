@@ -6,6 +6,7 @@ import main.PokerHands;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.Random;
+import java.util.HashSet;
 
 public class PokerHandsTest {
 
@@ -94,7 +95,7 @@ public class PokerHandsTest {
 
     @Test
     public void outputHandValuesRandom() {
-        String inputString = generateRandomHand();
+        String inputString = Hand.generateRandomHand();
         Card[] cards = Hand.generateHandFromString(inputString);
         outputHandValues(cards);
     }
@@ -104,6 +105,39 @@ public class PokerHandsTest {
         String inputString = "4H 1H 5S 7H 7D ";
         Card[] cards = Hand.generateHandFromString(inputString);
         outputHandValues(cards);
+    }
+
+    @Test
+    public void probabilityStressTest() {
+        int numIterations = 500000;
+        int pair = 0;
+        int twoPair = 0;
+        int threeOfAKind = 0;
+        int straight = 0;
+        int flush = 0;
+        int fullHouse = 0;
+        int fourOfAKind = 0;
+        int straightFlush = 0;
+        for (int i = 0; i < numIterations; i++) {
+            String randomHandString = Hand.generateRandomHand();
+            Card[] randomHand = Hand.generateHandFromString(randomHandString);
+            if (PokerHands.checkPair(randomHand) != -1) {pair++;}
+            if (PokerHands.checkTwoPairs(randomHand) != -1) {twoPair++;}
+            if (PokerHands.checkThreeOfAKind(randomHand) != -1) {threeOfAKind++;}
+            if (PokerHands.checkStraight(randomHand) != -1) {straight++;}
+            if (PokerHands.checkFlush(randomHand) != -1) {flush++;}
+            if (PokerHands.checkFullHouse(randomHand) != -1) {fullHouse++;}
+            if (PokerHands.checkFourOfAKind(randomHand) != -1) {fourOfAKind++;}
+            if (PokerHands.checkStraightFlush(randomHand) != -1) {straightFlush++;}
+        }
+        System.out.println("Pair probability: " + (float)pair/numIterations);
+        System.out.println("Two pair probability: " + (float)twoPair/numIterations);
+        System.out.println("Three of a kind probability: " + (float)threeOfAKind/numIterations);
+        System.out.println("Straight probability: " + (float)straight/numIterations);
+        System.out.println("Flush probability: " + (float)flush/numIterations);
+        System.out.println("Full House probability: " + (float)fullHouse/numIterations);
+        System.out.println("Four of a kind probability: " + (float)fourOfAKind/numIterations);
+        System.out.println("Straight Flush probability: " + (float)straightFlush/numIterations);
     }
 
     public void outputHandValues(Card[] cards) {
@@ -117,19 +151,4 @@ public class PokerHandsTest {
         System.out.println("Four of a Kind Check Returns: " + PokerHands.checkFourOfAKind(cards));
         System.out.println("Straight Flush Check Returns: " + PokerHands.checkStraightFlush(cards));
     }
-
-    //Doesn't currently generate only unique cards
-    public String generateRandomHand() {
-        Random random = new Random();
-        String inputString = "";
-        String[] possibleSuits = {"C", "D", "H", "S"};
-        for (int i = 0; i < Hand.getHandSize(); i++) {
-            int value = random.nextInt(9) + 1;
-            int suitIndex = random.nextInt(4);
-            inputString += String.valueOf(value) + possibleSuits[suitIndex] + " ";
-        }
-        System.out.println(inputString);
-        return inputString;
-    }
-
 }
