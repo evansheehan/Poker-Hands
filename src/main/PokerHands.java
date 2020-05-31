@@ -12,25 +12,43 @@ public class PokerHands {
 
     }
 
-    public int checkHighCard(Card[] hand) {
-        return hand[hand.length].getCardValueAsInt();
+    public static int checkHighCard(Card[] hand) {
+        return Hand.sortHandByValue(hand)[hand.length-1].getCardValueAsInt();
     }
 
-    public int checkPair(Hand hand) {
-        /*for (Card card : hand) {
-
-        }*/
+    public static int checkPair(Card[] hand) {
+        int matches = 1;
+        for (int i = 0; i <= Hand.getHandSize() - 2; i++) {
+            int checkValue = hand[i].getCardValueAsInt();
+            for (int j = i+1; j < Hand.getHandSize(); j++) {
+                if (checkValue == hand[j].getCardValueAsInt()) {
+                    matches++;
+                }
+            }
+            if (matches == 2) {return hand[i].getCardValueAsInt();}
+            matches = 1;
+        }
         return -1;
     }
 
-    public int checkTwoPairs(Hand hand) {
-        /*for (Card card : hand) {
-
-        }*/
+    public static int checkTwoPairs(Card[] hand) {
+        int firstPair = checkPair(hand);
+        if (firstPair != -1) {
+            int val1 = -1;
+            int val2 = -1;
+            for (int i = 0; i < hand.length; i++) {
+                if (hand[i].getCardValueAsInt() != firstPair) {val1 = hand[i].getCardValueAsInt();}
+                for (int j = i; j < hand.length; j++) {
+                    if (hand[i].getCardValueAsInt() != firstPair && hand[i].getCardValueAsInt() != val1) {
+                        val2 = hand[i].getCardValueAsInt();
+                    }
+                }
+            }
+        }
         return -1;
     }
 
-    public int checkThreeOfAKind(Card[] hand) {
+    public static int checkThreeOfAKind(Card[] hand) {
         int matches = 1;
         for (int i = 0; i <= Hand.getHandSize() - 3; i++) {
             int checkValue = hand[i].getCardValueAsInt();
@@ -45,24 +63,42 @@ public class PokerHands {
         return -1;
     }
 
-    public boolean checkStraight(Card[] hand) {
+    public static int checkStraight(Card[] hand) {
         int previousValue = hand[0].getCardValueAsInt();
         for (int i = 1; i < hand.length; i++) {
-            if (previousValue + 1 != hand[i].getCardValueAsInt()) {return false;}
+            if (previousValue + 1 != hand[i].getCardValueAsInt()) {return -1;}
             previousValue = hand[i].getCardValueAsInt();
         }
-        return true;
+        return hand[hand.length].getCardValueAsInt();
     }
 
-    public boolean checkFlush(Card[] hand) {
+    public static int checkFlush(Card[] hand) {
         String handSuit = hand[0].getCardSuit();
         for (int i = 1; i < hand.length; i++) {
-            if (!hand[i].getCardSuit().equals(handSuit)) return false;
+            if (!hand[i].getCardSuit().equals(handSuit)) return -1;
         }
-        return true;
+        return hand[hand.length].getCardValueAsInt();
     }
 
-    public int checkFourOfAKind(Card[] hand) {
+    public static int checkFullHouse(Card[] hand) {
+        int threeOfAKind = checkThreeOfAKind(hand);
+        if (threeOfAKind != -1) {
+            int val1 = -1;
+            int val2 = -1;
+            int i;
+            for (i = 0; i < hand.length && val1 == -1; i++) {
+                if (hand[i].getCardValueAsInt() != threeOfAKind) {val1 = hand[i].getCardValueAsInt();}
+            }
+            for (i = i; i < hand.length && val2 == -1; i++) {
+                if (hand[i].getCardValueAsInt() != threeOfAKind) {val2 = hand[i].getCardValueAsInt();}
+            }
+            if (val1 == val2) {return threeOfAKind;}
+            return -1;
+        }
+        return -1;
+    }
+
+    public static int checkFourOfAKind(Card[] hand) {
         int matches = 1;
         for (int i = 0; i <= Hand.getHandSize() - 4; i++) {
             int checkValue = hand[i].getCardValueAsInt();
@@ -77,15 +113,7 @@ public class PokerHands {
         return -1;
     }
 
-    public boolean checkFullHouse(Card[] hand) {
-        if (checkThreeOfAKind(hand) != -1) {
-
-        }
-        return false;
-    }
-
-    public int checkStraightFlush(Card[] hand) {
-        //int handRank = hand[hand.length-1].getCardValueAsInt();
+    public static int checkStraightFlush(Card[] hand) {
         int previousValue = hand[0].getCardValueAsInt();
         String handSuit = hand[0].getCardSuit();
         for (int i = 1; i < hand.length; i++) {
@@ -93,6 +121,6 @@ public class PokerHands {
             if (previousValue + 1 != hand[i].getCardValueAsInt()) {return -1;}
             previousValue = hand[i].getCardValueAsInt();
         }
-        return hand[hand.length].getCardValueAsInt();
+        return hand[hand.length-1].getCardValueAsInt();
     }
 }
