@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashSet;
+import java.util.Random;
+
 public class Hand {
 
     private static final int HAND_SIZE = 5;
@@ -57,6 +60,24 @@ public class Hand {
             }
         }
         return cards;
+    }
+
+    public static String generateRandomHand() {
+        HashSet<String> drawnCards  = new HashSet<>();
+        Random random = new Random();
+        String inputString = "";
+        String[] possibleSuits = {"C", "D", "H", "S"};
+        while (drawnCards.size() < 5) {
+            int value = random.nextInt(9) + 1;
+            int suitIndex = random.nextInt(4);
+            String stringToAdd = String.valueOf(value + possibleSuits[suitIndex]);
+            if (!drawnCards.contains(stringToAdd)){
+                inputString += stringToAdd + " ";
+                drawnCards.add(stringToAdd);
+            }
+        }
+        System.out.println(inputString);
+        return inputString;
     }
 
     public static int getHandSize() {
