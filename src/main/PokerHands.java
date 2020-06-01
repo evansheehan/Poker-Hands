@@ -36,11 +36,16 @@ public class PokerHands {
         if (firstPair != -1) {
             int val1 = -1;
             int val2 = -1;
-            for (int i = 0; i < hand.length; i++) {
-                if (hand[i].getCardValueAsInt() != firstPair) {val1 = hand[i].getCardValueAsInt();}
-                for (int j = i; j < hand.length; j++) {
-                    if (hand[i].getCardValueAsInt() != firstPair && hand[i].getCardValueAsInt() != val1) {
+            for (int i = 0; i <= Hand.getHandSize() - 2; i++) {
+                if (hand[i].getCardValueAsInt() != firstPair) {
+                    if (val1 == -1) {
+                        val1 = hand[i].getCardValueAsInt();
+                    }
+                    else if (val2 == -1) {
                         val2 = hand[i].getCardValueAsInt();
+                    }
+                    else if (hand[i].getCardValueAsInt() == val1 | hand[i].getCardValueAsInt() == val2) {
+                        return hand[i].getCardValueAsInt();
                     }
                 }
             }
@@ -69,7 +74,7 @@ public class PokerHands {
             if (previousValue + 1 != hand[i].getCardValueAsInt()) {return -1;}
             previousValue = hand[i].getCardValueAsInt();
         }
-        return hand[hand.length].getCardValueAsInt();
+        return hand[hand.length-1].getCardValueAsInt();
     }
 
     public static int checkFlush(Card[] hand) {
@@ -77,7 +82,7 @@ public class PokerHands {
         for (int i = 1; i < hand.length; i++) {
             if (!hand[i].getCardSuit().equals(handSuit)) return -1;
         }
-        return hand[hand.length].getCardValueAsInt();
+        return hand[hand.length-1].getCardValueAsInt();
     }
 
     public static int checkFullHouse(Card[] hand) {
