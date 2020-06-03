@@ -5,28 +5,29 @@ public class Card {
     private String cardSuit = "";
 
     public Card(String cardString) {
+        cardString = cardString.replaceAll("\\s", "");
         if (cardString.length() != 2) {
-            System.out.println("Card length does not equal 2: " + cardString
-                    + "...returning without instantiating card values.");
-            return;
+            throw new IllegalArgumentException("Card length must equal 2: A card value and a card suit.");
         }
         String localCardValue = cardString.substring(0, 1);
         String localCardSuit = cardString.substring(1, 2);
 
-        //Also T J Q K A
-        if (localCardValue.matches("[1-9 | TJQKA]")) {
-            cardValue = localCardValue;
+        //Values 1-9 + Ten, Jack, Queen, King, and Ace
+        if (localCardValue.matches("[2-9 | TJQKA | tjqka]")) {
+            cardValue = localCardValue.toUpperCase();
         }
         else {
-            System.out.println("Not a valid card value");
+            //System.out.println("Not a valid card value");
+            throw new IllegalArgumentException("Not a valid card value");
         }
 
-        //H S C D
-        if (localCardSuit.matches("[HSCD]")) {
+        //Hearts, Spades, Clubs, and Diamonds
+        if (localCardSuit.matches("[HSCD | hcsd]")) {
             cardSuit = localCardSuit.toUpperCase();
         }
         else {
-            System.out.println("Not a valid card suit");
+            //System.out.println("Not a valid card suit");
+            throw new IllegalArgumentException("Not a valid card value");
         }
     }
 
