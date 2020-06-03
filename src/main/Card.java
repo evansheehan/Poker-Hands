@@ -12,7 +12,7 @@ public class Card {
         String localCardValue = cardString.substring(0, 1);
         String localCardSuit = cardString.substring(1, 2);
 
-        //Values 1-9 + Ten, Jack, Queen, King, and Ace
+        //Values 2-9 + Ten, Jack, Queen, King, and Ace
         if (localCardValue.matches("[2-9 | TJQKA | tjqka]")) {
             cardValue = localCardValue.toUpperCase();
         }
