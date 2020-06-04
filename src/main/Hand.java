@@ -1,5 +1,3 @@
-package main;
-
 import java.util.HashSet;
 import java.util.Random;
 
@@ -40,7 +38,7 @@ public class Hand {
     /**
      * Uses insertion sort, which is quick for small arrays.
      * @param cardsIn
-     * @return Returns a sorted by value copy of the input array.
+     * @return Returns a copy of the input array sorted by the card values.
      */
     public static Card[] sortHandByValue(Card[] cardsIn) {
         Card[] cards = cardsIn.clone();
@@ -59,7 +57,7 @@ public class Hand {
      * First sorts the array by suit in alphabetical order (C -> D -> H -> S).
      * Afterwards, sorts by value within each group of suits.
      * @param cardsIn
-     * @return Returns a sorted by suit copy of the input array.
+     * @return Returns a copy of the input array sorted by the card suits.
      */
     public static Card[] sortHandBySuit(Card[] cardsIn) {
         Card[] cards = cardsIn.clone();

@@ -1,10 +1,4 @@
-package test;
-
-import main.Card;
-import main.Hand;
-import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class HandTest {
@@ -75,7 +69,7 @@ public class HandTest {
     public void handSortTest() {
         String inputString = "2H KD KS AC 5D";
         Card[] cards = Hand.generateHandFromString(inputString);
-        //cards = Hand.sortHandBySuit(cards);
+        cards = Hand.sortHandBySuit(cards);
         for (Card card : cards) {
             System.out.println(card.getCardValue() + card.getCardSuit());
         }
@@ -86,7 +80,7 @@ public class HandTest {
     public void handSortTestMoreMixed() {
         String inputString = "TD 8H 2C QS 6D";
         Card[] cards = Hand.generateHandFromString(inputString);
-        //cards = Hand.sortHandBySuit(cards);
+        cards = Hand.sortHandBySuit(cards);
         for (Card card : cards) {
             System.out.println(card.getCardValue() + card.getCardSuit());
         }

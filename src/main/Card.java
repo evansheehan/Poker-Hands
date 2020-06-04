@@ -1,5 +1,3 @@
-package main;
-
 public class Card {
     private String cardValue = "-1";
     private String cardSuit = "";
@@ -35,6 +33,10 @@ public class Card {
         return cardValue;
     }
 
+    public String getCardSuit() {
+        return cardSuit;
+    }
+
     public int getCardValueAsInt() {
         if (cardValue.matches("[TJQKA]")) {
             switch (cardValue) {
@@ -53,6 +55,25 @@ public class Card {
         return Integer.parseInt(cardValue);
     }
 
+    public static String getCardValueAsString(int cardValue) {
+        if (cardValue < 10) {
+            return String.valueOf(cardValue);
+        }
+        switch(cardValue) {
+            case 10:
+                return "Ten";
+            case 11:
+                return "Jack";
+            case 12:
+                return "Queen";
+            case 13:
+                return "King";
+            case 14:
+                return "Ace";
+        }
+        throw new IllegalArgumentException("Something went wrong...card value doesn't match cases.");
+    }
+
     public int getCardSuitAsInt() {
         switch (cardSuit) {
             case "C":
@@ -64,11 +85,6 @@ public class Card {
             case "S":
                 return 4;
         }
-        System.out.println("Something went wrong...card suit doesn't match cases");
-        return -1;
-    }
-
-    public String getCardSuit() {
-        return cardSuit;
+        throw new IllegalArgumentException("Something went wrong...card suit doesn't match cases.");
     }
 }

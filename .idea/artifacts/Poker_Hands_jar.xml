@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Poker-Hands:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Poker_Hands_jar</output-path>
+    <root id="archive" name="Poker-Hands.jar">
+      <element id="module-output" name="Poker-Hands" />
+    </root>
+  </artifact>
+</component>
